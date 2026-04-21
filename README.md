@@ -1,74 +1,59 @@
-# Nacionale API (VPS Source)
+# Nacionale Demo Commerce API
 
-Minimalan, produkcijski API sloj izdvojen iz live VPS deploy-a za nacionale.svilenkovic.rs.
+Javni showcase repozitorijum za API sloj projekta Nacionale.
 
-Ovaj repozitorijum je namenjen kao javni code showcase:
-- prikazuje arhitekturu porudzbina/proizvoda/kolekcija
-- ne otkriva frontend source niti osetljive kredencijale
-- koristi env konfiguraciju umesto hardkodovanih tajni
+> Status: Demo projekat pravljen kao probna verzija za klijenta.
+> Klijent se na kraju nije odlucio za finalnu realizaciju sajta.
+
+## Sta je javno objavljeno
+
+Ovaj repozitorijum namerno sadrzi samo backend API showcase deo:
+- cist i dokumentovan PHP API
+- validaciju porudzbina na serveru
+- sigurnije rukovanje unosom i konfiguracijom
+- env baziranu konfiguraciju bez hardkodovanih tajni
+
+Frontend source i kompletan produkcioni kod nisu javno objavljeni.
 
 ## Struktura
 
-- `config.php` - CORS, DB konekcija, JSON helperi, rate limiting
-- `products.php` - lista proizvoda i pojedinacni proizvod po slug-u
-- `collections.php` - lista kolekcija i kolekcija po slug-u
-- `orders.php` - kreiranje porudzbine i pregled porudzbine
-- `.env.example` - primer konfiguracije za okruzenje
+- `api/config.php` - CORS, DB konekcija, helper funkcije, rate limiting
+- `api/products.php` - listanje i single fetch proizvoda
+- `api/collections.php` - listanje i single fetch kolekcija
+- `api/orders.php` - kreiranje porudzbine i status lookup
+- `.env.example` - primer konfiguracije
+- `docs/API_REFERENCE.md` - detaljni endpoint opisi
+- `docs/ARCHITECTURE.md` - tehnicka arhitektura i tokovi
+- `NOTICE_DEMO.md` - formalna napomena o demo statusu
 
-## Endpoint-i
+## Kvalitet i sigurnost
 
-- `GET /api/products.php`
-- `GET /api/products.php?slug=<slug>`
-- `GET /api/products.php?collection=<slug>&featured=1&sort=price-asc`
-- `GET /api/collections.php`
-- `GET /api/collections.php?slug=<slug>`
-- `POST /api/orders.php`
-- `GET /api/orders.php?id=<order_id>&phone=<telefon>`
+- prepared statements za sve SQL upite
+- server-side validacija cena i artikala
+- normalizacija i validacija ulaza
+- rate limiting po IP adresi
+- transaction safety za upis porudzbine
+- bezbedan JSON parsing sa kontrolom greske
 
-## Primer POST payload-a
+## Brzi start
 
-```json
-{
-  "customer_name": "Petar Petrovic",
-  "customer_phone": "+38160111222",
-  "customer_email": "petar@example.com",
-  "address": "Bulevar oslobodjenja 10",
-  "city": "Novi Sad",
-  "zip_code": "21000",
-  "note": "Pozvati pre isporuke",
-  "items": [
-    {
-      "product_id": 12,
-      "color": "#111111",
-      "size": "L",
-      "quantity": 2
-    }
-  ]
-}
-```
-
-## Bezbednosne napomene
-
-- Input validacija i normalizacija za sve kljucne ulaze
-- SQL upiti su prepared statements
-- Cene se validiraju na serveru (ne veruje se klijentu)
-- Rate limiting po IP za endpoint porudzbine
-- Osetljivi podaci su pomereni u env varijable
-
-## Pokretanje
-
-1. Kopirati `.env.example` u lokalni env mehanizam servera.
-2. Postaviti realne DB vrednosti u env.
-3. Deploy API fajlova u web root `/api` folder.
-4. Proveriti syntax:
+1. Kopiraj env vrednosti iz `.env.example`.
+2. Postavi realne DB kredencijale kroz server environment.
+3. Deploy API fajlova u `/api` folder.
+4. Proveri syntax:
 
 ```bash
-php -l config.php
-php -l products.php
-php -l collections.php
-php -l orders.php
+php -l api/config.php
+php -l api/products.php
+php -l api/collections.php
+php -l api/orders.php
 ```
 
-## Napomena
+## Live referenca
 
-Frontend source nije deo ovog javnog paketa po zahtevu vlasnika projekta.
+- Site URL: https://nacionale.svilenkovic.rs
+
+## Demo napomena
+
+Ovaj projekat je ostavljen javno iskljucivo kao tehnicki portfolio primer.
+Nije aktivan komercijalni proizvod.
