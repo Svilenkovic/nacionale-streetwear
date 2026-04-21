@@ -1,46 +1,74 @@
-# NACIONALE — Premium Serbian Streetwear
+# Nacionale API (VPS Source)
 
-![Status](https://img.shields.io/badge/status-live-brightgreen) ![Next.js](https://img.shields.io/badge/Next.js-16-black) ![PHP](https://img.shields.io/badge/API-PHP%208.3-777BB4)
+Minimalan, produkcijski API sloj izdvojen iz live VPS deploy-a za nacionale.svilenkovic.rs.
 
-## 🔗 Live: [nacionale.svilenkovic.rs](https://nacionale.svilenkovic.rs)
+Ovaj repozitorijum je namenjen kao javni code showcase:
+- prikazuje arhitekturu porudzbina/proizvoda/kolekcija
+- ne otkriva frontend source niti osetljive kredencijale
+- koristi env konfiguraciju umesto hardkodovanih tajni
 
-## Overview
-Full-stack e-commerce platform for a premium Serbian streetwear brand. Features cinematic animations, 3D product showcases, and a complete order management system.
+## Struktura
 
-## Tech Stack
-- **Frontend:** Next.js 16 (Static Export), React 19, Tailwind CSS 4
-- **Backend:** PHP 8.3 REST API, MySQL (MariaDB 10.11)
-- **Animations:** GSAP ScrollTrigger, Three.js 3D elements
-- **Typography:** Space Grotesk
-- **Hosting:** Nginx, Ubuntu 24.04, Let's Encrypt SSL
+- `config.php` - CORS, DB konekcija, JSON helperi, rate limiting
+- `products.php` - lista proizvoda i pojedinacni proizvod po slug-u
+- `collections.php` - lista kolekcija i kolekcija po slug-u
+- `orders.php` - kreiranje porudzbine i pregled porudzbine
+- `.env.example` - primer konfiguracije za okruzenje
 
-## Features
-- 🛍️ Product catalog with collections
-- 🛒 Shopping cart with order placement
-- 📱 Fully responsive PWA-ready design
-- 🎬 Cinematic scroll animations (GSAP)
-- 🧊 3D product viewer (Three.js)
-- 🔐 Admin panel for order/product management
-- 📊 Real-time inventory tracking
-- 🚀 Static export for blazing-fast performance
+## Endpoint-i
 
-## Architecture
+- `GET /api/products.php`
+- `GET /api/products.php?slug=<slug>`
+- `GET /api/products.php?collection=<slug>&featured=1&sort=price-asc`
+- `GET /api/collections.php`
+- `GET /api/collections.php?slug=<slug>`
+- `POST /api/orders.php`
+- `GET /api/orders.php?id=<order_id>&phone=<telefon>`
+
+## Primer POST payload-a
+
+```json
+{
+  "customer_name": "Petar Petrovic",
+  "customer_phone": "+38160111222",
+  "customer_email": "petar@example.com",
+  "address": "Bulevar oslobodjenja 10",
+  "city": "Novi Sad",
+  "zip_code": "21000",
+  "note": "Pozvati pre isporuke",
+  "items": [
+    {
+      "product_id": 12,
+      "color": "#111111",
+      "size": "L",
+      "quantity": 2
+    }
+  ]
+}
 ```
-Frontend (Next.js Static Export)
-    ├── Product pages with dynamic routing
-    ├── Cart state management
-    ├── GSAP scroll-triggered animations
-    └── Three.js 3D scenes
 
-Backend (PHP REST API)
-    ├── /api/products.php — CRUD products
-    ├── /api/collections.php — Collection management
-    ├── /api/orders.php — Order processing
-    └── MySQL database (nacionale)
+## Bezbednosne napomene
+
+- Input validacija i normalizacija za sve kljucne ulaze
+- SQL upiti su prepared statements
+- Cene se validiraju na serveru (ne veruje se klijentu)
+- Rate limiting po IP za endpoint porudzbine
+- Osetljivi podaci su pomereni u env varijable
+
+## Pokretanje
+
+1. Kopirati `.env.example` u lokalni env mehanizam servera.
+2. Postaviti realne DB vrednosti u env.
+3. Deploy API fajlova u web root `/api` folder.
+4. Proveriti syntax:
+
+```bash
+php -l config.php
+php -l products.php
+php -l collections.php
+php -l orders.php
 ```
 
-## Screenshots
-> Coming soon
+## Napomena
 
----
-*Developed by [Dimitrije Svilenković](https://svilenkovic.com)*
+Frontend source nije deo ovog javnog paketa po zahtevu vlasnika projekta.
