@@ -35,7 +35,7 @@ export default function PrivacyPage() {
             <p>
               Rukovalac sajta i ovih demo prikaza je:
               <br />
-              <strong className="text-text-primary">Dimitrije Svilenković</strong> · Leskovac, Srbija
+              <strong className="text-text-primary">D. Svilenković</strong> · Leskovac, Srbija
               <br />
               Web: <Link href="https://svilenkovic.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">svilenkovic.com</Link>
               <br />
