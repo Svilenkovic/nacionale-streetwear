@@ -50,7 +50,7 @@ export const useCart = create<CartState>()(
       getTotalItems: () => get().items.reduce((total, item) => total + item.quantity, 0),
     }),
     {
-      name: 'nacionale-cart',
+      name: 'obelisk-cart',
     }
   )
 );

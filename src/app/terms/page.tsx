@@ -24,7 +24,7 @@ export default function TermsPage() {
           <section>
             <h2 className="font-heading uppercase tracking-widest text-text-primary text-lg mb-4">1. Predmet</h2>
             <p>
-              Ovi uslovi važe za sve posetioce sajta <code className="text-primary">nacionale.svilenkovic.rs</code> („OBELISK&rdquo;).
+              Ovi uslovi važe za sve posetioce sajta <code className="text-primary">obelisk.svilenkovic.rs</code> („OBELISK&rdquo;).
               Sajt je <strong className="text-primary">portfolio demonstracija</strong> web razvoja, dizajna i 3D animacije.
               Pristupom sajtu prihvatate ove uslove. Ako se ne slažete — molimo da napustite sajt.
             </p>

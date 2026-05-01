@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import SmoothScrollProvider from "@/components/layout/SmoothScrollProvider";
 import CookieBanner from "@/components/layout/CookieBanner";
 import PortfolioBadge from "@/components/layout/PortfolioBadge";
+import BackToTop from "@/components/layout/BackToTop";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -19,7 +20,7 @@ const inter = Inter({
   display: 'swap',
 });
 
-const SITE_URL = "https://nacionale.svilenkovic.rs";
+const SITE_URL = "https://obelisk.svilenkovic.rs";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -29,8 +30,8 @@ export const metadata: Metadata = {
   },
   description: "Portfolio koncept: imersivni 3D e-commerce sa scroll choreografijom, GSAP/Three.js, Next.js. Demo brend bez aktivne kupovine.",
   keywords: ["portfolio", "3d web", "next.js", "three.js", "gsap", "scroll animation", "e-commerce demo", "svilenkovic"],
-  authors: [{ name: "Dimitrije Svilenković", url: "https://svilenkovic.com" }],
-  creator: "Dimitrije Svilenković",
+  authors: [{ name: "D. Svilenković", url: "https://svilenkovic.com" }],
+  creator: "D. Svilenković",
   publisher: "svilenkovic.com",
   robots: { index: true, follow: true },
   alternates: { canonical: SITE_URL },
@@ -68,6 +69,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </SmoothScrollProvider>
+        <BackToTop />
         <CookieBanner />
       </body>
     </html>

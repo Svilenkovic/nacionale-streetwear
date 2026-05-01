@@ -25,7 +25,7 @@ export default function PrivacyPage() {
             <h2 className="font-heading uppercase tracking-widest text-text-primary text-lg mb-4">1. Šta je OBELISK</h2>
             <p>
               OBELISK je <strong className="text-primary">portfolio demonstracija</strong> imersivnog 3D web pristupa, hostovana
-              na <code className="text-primary">nacionale.svilenkovic.rs</code>. Sajt nije aktivna prodavnica;
+              na <code className="text-primary">obelisk.svilenkovic.rs</code>. Sajt nije aktivna prodavnica;
               svi proizvodi, cene i forma za poručivanje postoje isključivo radi vizuelnog prikaza tehnike i dizajna.
             </p>
           </section>

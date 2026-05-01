@@ -8,8 +8,6 @@ import Preloader from '@/components/animations/Preloader';
 import ScrollExperience from '@/components/3d/ScrollExperience';
 import TextReveal from '@/components/animations/TextReveal';
 import Button from '@/components/ui/Button';
-import BrandStory from '@/components/sections/BrandStory';
-import QualitySection from '@/components/sections/QualitySection';
 import { sceneScrollProxy } from '@/lib/scrollProxy';
 import { mockProducts } from '@/lib/mockData';
 import { useCart } from '@/hooks/useCart';
@@ -195,9 +193,6 @@ export default function Home() {
         </div>
 
       </div>
-
-      <BrandStory />
-      <QualitySection />
     </>
   );
 }

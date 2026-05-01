@@ -1,4 +1,4 @@
-export const API_URL = "https://nacionale.svilenkovic.rs/api";
+export const API_URL = "https://obelisk.svilenkovic.rs/api";
 
 export const THEME = {
   colors: {
