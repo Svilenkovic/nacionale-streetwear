@@ -103,24 +103,24 @@ export default function Home() {
       <div ref={containerRef} className="relative z-10 w-full flex flex-col items-center">
 
         {/* PAGE 1: HERO */}
-        <section className="scroll-section w-full h-[100svh] flex flex-col items-center justify-center text-center px-6 pointer-events-none mix-blend-difference mb-32 relative">
+        <section className="scroll-section w-full h-[100svh] flex flex-col items-center justify-center text-center px-4 sm:px-6 pointer-events-none mix-blend-difference mb-32 relative">
            <TextReveal
             elementType="h1"
             text="OBELISK"
-            className="text-[clamp(3rem,15vw,12rem)] font-heading font-bold text-white tracking-[0.1em] lg:tracking-[0.15em] uppercase leading-none mb-4"
+            className="text-[clamp(2.75rem,16vw,12rem)] font-heading font-bold text-white tracking-[0.08em] sm:tracking-[0.1em] lg:tracking-[0.15em] uppercase leading-none mb-4"
            />
            <div className="reveal-up flex flex-col items-center">
              <span className="text-primary text-4xl mb-2 font-serif" aria-hidden="true">&ldquo;</span>
-             <h2 className="text-white/90 text-base md:text-2xl font-body font-light tracking-widest uppercase italic max-w-lg px-2">
+             <h2 className="text-white/90 text-sm sm:text-base md:text-2xl font-body font-light tracking-widest uppercase italic max-w-lg px-2">
                 Geometrija svetla, tišina forme
              </h2>
            </div>
         </section>
 
         {/* PAGE 2: BRAND ESSENCE */}
-        <section data-petlja="left" className="scroll-section w-full min-h-[80vh] max-w-7xl mx-auto flex items-center justify-center md:justify-end px-6 md:px-12 pointer-events-none mix-blend-plus-lighter mb-32 relative">
+        <section data-petlja="left" className="scroll-section w-full min-h-[80vh] max-w-screen-2xl mx-auto flex items-center justify-center md:justify-end px-4 sm:px-6 md:px-12 pointer-events-none mix-blend-plus-lighter mb-32 relative">
            <div className="max-w-3xl text-center md:text-right reveal-up">
-              <h2 className="text-4xl md:text-7xl font-heading font-light uppercase tracking-widest mb-8 md:mb-10 text-white leading-tight">
+              <h2 className="text-4xl sm:text-5xl md:text-7xl font-heading font-light uppercase tracking-widest mb-8 md:mb-10 text-white leading-tight">
                   Oblikovan<br/><span className="italic text-primary font-serif normal-case opacity-90">Kroz svetlost</span>
               </h2>
               <p className="text-base md:text-2xl text-white/90 leading-relaxed font-light mx-auto md:ml-auto md:mr-0 mb-6">
@@ -159,13 +159,13 @@ export default function Home() {
               : 'text-center md:text-right';
 
            return (
-             <section key={product.id} data-petlja={petljaPos} className={`scroll-section w-full min-h-[90vh] max-w-7xl mx-auto flex items-center ${sectionAlign} px-6 md:px-12 relative mb-32 md:mb-48`}>
+             <section key={product.id} data-petlja={petljaPos} className={`scroll-section w-full min-h-[90vh] max-w-screen-2xl mx-auto flex items-center ${sectionAlign} px-4 sm:px-6 md:px-12 relative mb-32 md:mb-48`}>
 
                 <div className={`absolute top-1/2 -translate-y-1/2 ${isEven ? 'right-[-5vw]' : 'left-[-5vw]'} z-[-1] pointer-events-none opacity-[0.05] hidden md:block`} aria-hidden="true">
                      <h2 className="text-[15vw] font-heading font-bold whitespace-nowrap text-white tracking-widest reveal-up">{product.design_image}</h2>
                 </div>
 
-                <div className={`flex flex-col lg:flex-row items-center justify-center gap-10 md:gap-12 w-full ${isEven ? '' : 'lg:flex-row-reverse'} z-10 pointer-events-auto relative`}>
+                <div className={`flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-10 md:gap-12 w-full ${isEven ? '' : 'lg:flex-row-reverse'} z-10 pointer-events-auto relative`}>
 
                     <div className="product-image-container w-full lg:w-1/2 flex items-center justify-center reveal-up z-20">
                        <img
@@ -177,7 +177,7 @@ export default function Home() {
                        />
                     </div>
 
-                    <div className={`product-card w-full lg:w-1/2 p-6 sm:p-8 md:p-12 glass rounded-2xl bg-[#0a1733]/90 backdrop-blur-3xl border border-[#16264a] shadow-2xl reveal-up ${cardTextAlign} relative z-30`}>
+                    <div className={`product-card w-full lg:w-1/2 p-5 sm:p-8 md:p-12 glass rounded-2xl bg-[#0a1733]/90 backdrop-blur-3xl border border-[#16264a] shadow-2xl reveal-up ${cardTextAlign} relative z-30`}>
                        <div className={`flex items-center mb-5 md:mb-6 ${headerRowAlign}`}>
                            <span className="text-[10px] md:text-xs tracking-[0.3em] font-heading uppercase text-primary block">
                                Demo prikaz
