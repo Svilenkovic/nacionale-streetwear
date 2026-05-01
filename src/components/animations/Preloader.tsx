@@ -1,16 +1,22 @@
 "use client";
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 
 export default function Preloader() {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
-  
+
   useGSAP(() => {
     if (!containerRef.current || !textRef.current) return;
-    
+
+    const reduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) {
+      gsap.set(containerRef.current, { display: 'none' });
+      return;
+    }
+
     document.body.style.overflow = 'hidden';
 
     const tl = gsap.timeline({
@@ -27,9 +33,9 @@ export default function Preloader() {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="fixed inset-0 z-50 flex items-center justify-center bg-[#051024] select-none pointer-events-none">
+    <div ref={containerRef} aria-hidden="true" className="fixed inset-0 z-50 flex items-center justify-center bg-[#051024] select-none pointer-events-none">
        <h1 ref={textRef} className="font-heading text-4xl md:text-6xl lg:text-8xl font-bold uppercase text-white tracking-widest text-center mix-blend-screen">
-          NACIONALE
+          OBELISK
        </h1>
     </div>
   );

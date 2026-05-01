@@ -9,16 +9,16 @@ import ScrollReveal from '@/components/animations/ScrollReveal';
 function CollectionsContent() {
   const searchParams = useSearchParams();
   const slug = searchParams.get('slug');
-  
+
   const { collections, isLoading: collectionsLoading } = useCollections(slug || undefined);
   const { products, isLoading: productsLoading } = useProducts(slug || undefined);
-  
+
   const activeCollection = slug ? collections?.find(c => c.slug === slug) : null;
-  const title = activeCollection ? activeCollection.name : "Sve Kolekcije";
-  const desc = activeCollection ? activeCollection.description : "Istražite našu celokupnu ponudu premium majica, dizajniranih sa beskompromisnim fokusom na kvalitet.";
+  const title = activeCollection ? activeCollection.name : "Sve forme";
+  const desc = activeCollection ? activeCollection.description : "Pregled svih komada iz primarne edicije — vizuelna demonstracija kataloga.";
 
   const skeletons = Array(6).fill(0).map((_, i) => (
-      <div key={i} className="aspect-[3/4] bg-surface-light rounded-xl animate-pulse border border-white/5 relative overflow-hidden">
+      <div key={i} className="aspect-[3/4] bg-surface-light rounded-xl animate-pulse border border-white/5 relative overflow-hidden" aria-hidden="true">
          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-surface to-transparent opacity-50"></div>
       </div>
   ));
@@ -53,7 +53,7 @@ function CollectionsContent() {
             ))
           ) : (
             <div className="col-span-full py-32 text-center text-text-secondary border border-white/5 rounded-xl bg-surface-light/50 font-heading uppercase tracking-widest text-sm">
-               Trenutno nema proizvoda u ovoj kolekciji.
+               Trenutno nema komada u ovoj edicji.
             </div>
           )}
         </div>
@@ -64,7 +64,7 @@ function CollectionsContent() {
 
 export default function CollectionsPage() {
     return (
-        <Suspense fallback={<div className="min-h-screen pt-32 flex justify-center"><div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin"></div></div>}>
+        <Suspense fallback={<div className="min-h-screen pt-32 flex justify-center"><div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" role="status" aria-label="Učitavanje" /></div>}>
             <CollectionsContent />
         </Suspense>
     )

@@ -5,37 +5,35 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { sceneScrollProxy } from '@/lib/scrollProxy';
 
-export default function GarmentModel() {
+interface Props {
+  lowDetail?: boolean;
+}
+
+export default function GarmentModel({ lowDetail = false }: Props) {
   const meshRef = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
     if (!meshRef.current) return;
-    
+
     const r1 = sceneScrollProxy.progress;
     const time = state.clock.elapsedTime;
 
-    // Movement: The elegant wandering wave (non-fixed positions)
     const amplitude = Math.min(r1 * 10, 1) * 3;
-    // START LEFT by making amplitude negative initially
     meshRef.current.position.x = Math.sin(r1 * Math.PI * 6) * -amplitude;
-    
-    // Depth starting from far back, merging into frame
+
     const startZ = THREE.MathUtils.lerp(3, 0, Math.min(r1 * 5, 1));
     meshRef.current.position.z = THREE.MathUtils.lerp(meshRef.current.position.z, startZ, 0.05);
-    
-    // Descension on Y axis
+
     meshRef.current.position.y = THREE.MathUtils.lerp(0.5, -3.5, r1);
-    
-    // SCALE: Povećano za 40% (0.35 to 0.49)!
-    const pulse = Math.abs(Math.sin(time * 0.5)) * 0.05; 
+
+    const pulse = Math.abs(Math.sin(time * 0.5)) * 0.05;
     const baseScale = THREE.MathUtils.lerp(0.35, 0.49, Math.abs(Math.sin(r1 * Math.PI * 4)));
     const scale = baseScale + pulse;
     meshRef.current.scale.lerp(new THREE.Vector3(scale, scale, scale), 0.05);
-    
-    // Rotation: Clean spinning that NEVER crashes
+
     meshRef.current.rotation.y = r1 * Math.PI * 4 + Math.sin(time * 0.4) * 0.2;
     meshRef.current.rotation.x = r1 * Math.PI * 0.5 + Math.cos(time * 0.3) * 0.2;
-    
+
     const material = meshRef.current.material as THREE.MeshPhysicalMaterial;
     if (r1 < 0.20) {
        material.color.lerp(new THREE.Color('#0a1733'), 0.05);
@@ -46,19 +44,23 @@ export default function GarmentModel() {
     } else {
        material.color.lerp(new THREE.Color('#111111'), 0.05);
     }
-    
+
     material.metalness = THREE.MathUtils.lerp(0.4, 0.9, r1);
     material.roughness = THREE.MathUtils.lerp(0.6, 0.1, r1);
   });
 
+  // Mobilna verzija: znatno manje tubularnih segmenata + radial; izgleda isto, 4-5x lakša.
+  const tubularSegments = lowDetail ? 96 : 300;
+  const radialSegments = lowDetail ? 24 : 80;
+
   return (
-    <mesh ref={meshRef} castShadow receiveShadow>
-      <torusKnotGeometry args={[1.5, 0.45, 300, 80, 2, 5]} />
+    <mesh ref={meshRef} castShadow={!lowDetail} receiveShadow={!lowDetail}>
+      <torusKnotGeometry args={[1.5, 0.45, tubularSegments, radialSegments, 2, 5]} />
       <meshPhysicalMaterial
         color="#c9a84c"
         roughness={0.2}
         metalness={0.9}
-        clearcoat={0.6}
+        clearcoat={lowDetail ? 0 : 0.6}
         clearcoatRoughness={0.2}
         envMapIntensity={2.5}
       />

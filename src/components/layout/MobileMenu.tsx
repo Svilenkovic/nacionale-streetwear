@@ -11,7 +11,8 @@ interface MobileMenuProps {
 
 const links = [
   { name: 'POČETNA', href: '/' },
-  { name: 'KOLEKCIJE', href: '/collections' },
+  { name: 'KONCEPT', href: '/#about' },
+  { name: 'KVALITET', href: '/#quality' },
   { name: 'KORPA', href: '/cart' },
 ];
 
@@ -28,7 +29,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         autoAlpha: 1,
         duration: 0.1,
       });
-      
+
       gsap.to(bgRef.current, {
         clipPath: 'circle(150% at 100% 0%)',
         duration: 0.8,
@@ -62,16 +63,18 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   }, [isOpen]);
 
   return (
-    <div 
-      ref={containerRef} 
+    <div
+      id="mobile-menu"
+      ref={containerRef}
       className="fixed inset-0 z-40 invisible"
+      aria-hidden={!isOpen}
     >
-      <div 
-        ref={bgRef} 
+      <div
+        ref={bgRef}
         className="absolute inset-0 bg-background/95 backdrop-blur-xl"
         style={{ clipPath: 'circle(0% at 100% 0%)' }}
       >
-        <nav className="flex flex-col items-center justify-center h-full gap-8">
+        <nav className="flex flex-col items-center justify-center h-full gap-8" aria-label="Mobilna navigacija">
           {links.map((link, i) => (
             <Link
               key={link.name}
