@@ -9,9 +9,9 @@ export default function TShirt({ color = '#000000', abstract = true }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const viewportWidth = useThree((state) => state.viewport.width);
 
-  // Skalira petlju i njene pokrete prema širini viewport-a u world unitima.
-  // Desktop hero (~16 wide) → 1.0; tablet portrait (~5) → ~0.83; mobile portrait (~3) → ~0.5.
-  const scale = Math.min(1, Math.max(0.45, viewportWidth / 6));
+  // Skala: desktop hero (~16 wide) → 1.0; mobile portrait (~3) → 0.6 min.
+  // Float pokret se skalira proporcionalno da ne istisne mesh van vidljivog kadra.
+  const scale = Math.min(1, Math.max(0.6, viewportWidth / 5));
 
   const texture = useMemo(() => {
     if (typeof document === 'undefined') return null; // SSR fallback

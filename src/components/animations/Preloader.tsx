@@ -26,17 +26,33 @@ export default function Preloader() {
       }
     });
 
-    tl.fromTo(textRef.current, { y: 150, opacity: 0 }, { y: 0, opacity: 1, duration: 1.5, ease: 'power4.out' })
-      .to(textRef.current, { letterSpacing: '0.4em', duration: 2, ease: 'power3.inOut' }, "-=0.5")
-      .to(containerRef.current, { opacity: 0, duration: 1.5, ease: 'power2.inOut' }, "-=1");
+    // paddingLeft animira zajedno sa letterSpacing da kompenzuje trailing spacing
+    // (CSS letter-spacing dodaje prazno mesto i posle poslednjeg karaktera, što pomera
+    // tekst u levo unutar text-center boxa; jednako padding-left vraća ga u centar.)
+    tl.fromTo(textRef.current,
+        { y: 120, opacity: 0, letterSpacing: '0.1em', paddingLeft: '0.1em' },
+        { y: 0, opacity: 1, duration: 1.4, ease: 'power4.out' }
+      )
+      .to(textRef.current,
+        { letterSpacing: '0.4em', paddingLeft: '0.4em', duration: 1.8, ease: 'power3.inOut' },
+        '-=0.5'
+      )
+      .to(containerRef.current, { opacity: 0, duration: 1.2, ease: 'power2.inOut' }, '-=0.9');
 
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} aria-hidden="true" className="fixed inset-0 z-50 flex items-center justify-center bg-[#051024] select-none pointer-events-none">
-       <h1 ref={textRef} className="font-heading text-4xl md:text-6xl lg:text-8xl font-bold uppercase text-white tracking-widest text-center mix-blend-screen">
-          OBELISK
-       </h1>
+    <div
+      ref={containerRef}
+      aria-hidden="true"
+      className="fixed inset-0 z-50 grid place-items-center bg-[#051024] select-none pointer-events-none px-6"
+    >
+      <h1
+        ref={textRef}
+        className="font-heading text-[clamp(1.875rem,9vw,6rem)] md:text-7xl lg:text-8xl font-bold uppercase text-white text-center mix-blend-screen max-w-full"
+      >
+        OBELISK
+      </h1>
     </div>
   );
 }

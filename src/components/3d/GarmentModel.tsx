@@ -19,11 +19,13 @@ export default function GarmentModel({ lowDetail = false }: Props) {
     const r1 = sceneScrollProxy.progress;
     const time = state.clock.elapsedTime;
 
-    // Skala prema širini viewport-a u world unitima (camera fov 45 @ z=8 → ~3 wide na mobile portrait, ~16 na desktop).
-    // Drži petlju i njene levo-desno pokrete unutar vidljivog kadra na svim ekranima.
-    const vpScale = Math.min(1, Math.max(0.4, viewportWidth / 8));
+    // Razdvojeni faktori: meshScale drži petlju vidljivom (min 0.6 na mobile),
+    // motionScale ograničava amplitudu sin-talasa da nikad ne pređe pola širine ekrana.
+    // Camera fov 45 @ z=8 → viewport.width ~3 na mobile portrait, ~16 na desktop.
+    const meshScaleFactor = Math.min(1, Math.max(0.6, viewportWidth / 5));
+    const motionScaleFactor = Math.min(1, Math.max(0.25, viewportWidth / 12));
 
-    const amplitude = Math.min(r1 * 10, 1) * 3 * vpScale;
+    const amplitude = Math.min(r1 * 10, 1) * 3 * motionScaleFactor;
     meshRef.current.position.x = Math.sin(r1 * Math.PI * 6) * -amplitude;
 
     const startZ = THREE.MathUtils.lerp(3, 0, Math.min(r1 * 5, 1));
@@ -33,7 +35,7 @@ export default function GarmentModel({ lowDetail = false }: Props) {
 
     const pulse = Math.abs(Math.sin(time * 0.5)) * 0.05;
     const baseScale = THREE.MathUtils.lerp(0.35, 0.49, Math.abs(Math.sin(r1 * Math.PI * 4)));
-    const scale = (baseScale + pulse) * vpScale;
+    const scale = (baseScale + pulse) * meshScaleFactor;
     meshRef.current.scale.lerp(new THREE.Vector3(scale, scale, scale), 0.05);
 
     meshRef.current.rotation.y = r1 * Math.PI * 4 + Math.sin(time * 0.4) * 0.2;
@@ -65,7 +67,7 @@ export default function GarmentModel({ lowDetail = false }: Props) {
         color="#c9a84c"
         roughness={0.2}
         metalness={0.9}
-        clearcoat={lowDetail ? 0 : 0.6}
+        clearcoat={lowDetail ? 0.45 : 0.6}
         clearcoatRoughness={0.2}
         envMapIntensity={2.5}
       />
