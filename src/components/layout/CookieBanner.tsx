@@ -36,28 +36,28 @@ export default function CookieBanner() {
       role="dialog"
       aria-label="Saglasnost za kolačiće"
       aria-live="polite"
-      className="fixed bottom-4 left-4 right-4 md:right-auto md:max-w-md z-[100] bg-surface border border-primary/30 rounded-xl p-6 shadow-2xl backdrop-blur-xl"
+      className="fixed bottom-3 left-3 right-3 sm:left-4 sm:right-4 md:right-auto md:max-w-md max-w-[calc(100vw-1.5rem)] z-[100] bg-surface border border-primary/30 rounded-xl p-4 sm:p-5 md:p-6 shadow-2xl backdrop-blur-xl box-border"
     >
-      <h2 className="font-heading text-base uppercase tracking-widest mb-3 text-text-primary">Kolačići</h2>
-      <p className="text-sm text-text-secondary leading-relaxed mb-4">
+      <h2 className="font-heading text-sm sm:text-base uppercase tracking-widest mb-2 sm:mb-3 text-text-primary">Kolačići</h2>
+      <p className="text-xs sm:text-sm text-text-secondary leading-relaxed mb-3 sm:mb-4">
         Sajt koristi samo neophodne kolačiće za osnovnu funkcionalnost (npr. demo korpa).
         Analitika nije aktivna. Više detalja u{' '}
         <Link href="/privacy" className="text-primary hover:text-primary-hover underline underline-offset-4">Politici privatnosti</Link>{' '}
         i{' '}
         <Link href="/cookies" className="text-primary hover:text-primary-hover underline underline-offset-4">stranici Kolačići</Link>.
       </p>
-      <div className="flex flex-col sm:flex-row gap-3">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
         <button
           type="button"
           onClick={() => accept('essential')}
-          className="flex-1 px-4 py-2.5 border border-white/20 text-xs uppercase tracking-widest font-heading hover:bg-white/5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+          className="flex-1 px-3 py-2.5 border border-white/20 text-[11px] sm:text-xs uppercase tracking-widest font-heading hover:bg-white/5 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
         >
           Samo neophodni
         </button>
         <button
           type="button"
           onClick={() => accept('all')}
-          className="flex-1 px-4 py-2.5 bg-primary text-background text-xs uppercase tracking-widest font-bold font-heading hover:bg-primary-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface rounded"
+          className="flex-1 px-3 py-2.5 bg-primary text-background text-[11px] sm:text-xs uppercase tracking-widest font-bold font-heading hover:bg-primary-hover transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface rounded"
         >
           Prihvati sve
         </button>

@@ -57,14 +57,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="sr" className={`${spaceGrotesk.variable} ${inter.variable}`}>
-      <body className="antialiased bg-background text-text-primary overflow-x-hidden selection:bg-primary/30">
+      <body className="antialiased bg-background text-text-primary overflow-x-clip selection:bg-primary/30">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[200] focus:bg-primary focus:text-background focus:px-4 focus:py-2 focus:rounded">
           Pređi na glavni sadržaj
         </a>
         <PortfolioBadge />
         <SmoothScrollProvider>
           <Header />
-          <main id="main-content" className="min-h-screen relative z-10 w-full">
+          <main id="main-content" className="min-h-screen relative z-10 w-full overflow-x-clip">
             {children}
           </main>
           <Footer />

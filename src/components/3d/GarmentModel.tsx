@@ -65,11 +65,13 @@ export default function GarmentModel({ lowDetail = false }: Props) {
       <torusKnotGeometry args={[1.5, 0.45, tubularSegments, radialSegments, 2, 5]} />
       <meshPhysicalMaterial
         color="#c9a84c"
-        roughness={0.2}
-        metalness={0.9}
+        roughness={0.18}
+        metalness={0.85}
         clearcoat={lowDetail ? 0.45 : 0.6}
-        clearcoatRoughness={0.2}
-        envMapIntensity={2.5}
+        clearcoatRoughness={0.18}
+        envMapIntensity={lowDetail ? 3.5 : 2.8}
+        emissive="#c9a84c"
+        emissiveIntensity={lowDetail ? 0.18 : 0.1}
       />
     </mesh>
   );

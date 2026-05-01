@@ -30,17 +30,19 @@ export default function ScrollExperience() {
         frameloop={caps.isLowPower ? 'demand' : 'always'}
       >
         <Suspense fallback={null}>
-          <Environment preset="night" />
-          <ambientLight intensity={0.5} color="#051024" />
+          <Environment preset="night" environmentIntensity={1.2} />
+          <ambientLight intensity={1.4} color="#1b2c5a" />
+          <hemisphereLight args={['#e0eaff', '#0a1733', 0.6]} />
           <directionalLight
             castShadow={!caps.isMobile}
             position={[10, 10, 5]}
-            intensity={2}
+            intensity={3}
             shadow-mapSize={caps.isMobile ? [512, 512] : [1024, 1024]}
             color="#e0eaff"
           />
-          <directionalLight position={[-10, 5, -5]} intensity={1} color="#c9a84c" />
-          <pointLight position={[0, -5, 0]} intensity={1.5} color="#0a1733" />
+          <directionalLight position={[-10, 5, -5]} intensity={1.8} color="#c9a84c" />
+          <pointLight position={[0, 0, 6]} intensity={2} color="#d4b65a" distance={20} />
+          <pointLight position={[0, -5, 0]} intensity={2} color="#16264a" />
 
           <GarmentModel lowDetail={caps.isMobile || caps.isLowPower} />
 

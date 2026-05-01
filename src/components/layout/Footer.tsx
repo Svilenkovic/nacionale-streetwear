@@ -40,7 +40,7 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between border-t border-white/5 pt-6 gap-2">
           <p className="text-xs text-text-secondary tracking-wider font-heading uppercase">
-            © {new Date().getFullYear()} OBELISK · Demo portfolio
+            © 2026 OBELISK · Demo portfolio
           </p>
           <p className="text-xs text-text-secondary tracking-wider font-heading uppercase">
             Dizajn i razvoj —{" "}
